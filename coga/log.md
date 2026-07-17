@@ -2,3 +2,4 @@
 2026-06-17 09:00 [coga-build] [coga:init] created (mode=interactive, status=active)
 2026-07-17 16:50 [bootstrap/orient] [human:nicktoper] launched (assignee=claude, agent=claude)
 2026-07-17 16:50 [bootstrap/orient] [system] {"agent":"claude","agent_turns":null,"cache_creation_input_tokens":null,"cache_read_input_tokens":null,"cli":"claude","content_status":"unknown","elapsed_seconds":8.850541,"ended_at":"2026-07-17T23:50:58.749181Z","human_turns":null,"input_tokens":null,"model":null,"outcome":null,"outcome_status":"completed","output_tokens":null,"provider":"anthropic","request":null,"schema":2,"session_id":"b1d33f62-bc5f-4f55-93fb-edfb6a3af4c5","slug":"bootstrap/orient","started_at":"2026-07-17T23:50:49.898640Z","step":null,"title":"Orient an agent in this coga/ repo","ts":"2026-07-17T23:50:58.749181Z","usage_status":"unknown"}
+2026-07-17 16:51 [bootstrap/orient] [human:nicktoper] launched (assignee=codex, agent=codex)
