@@ -1,0 +1,9 @@
+# >>> coga-managed >>>
+# Managed by `coga init`. Don't edit between these markers —
+# they will be overwritten. Symlinks below are created by `coga init` so
+# agent CLIs (Claude Code, Codex) can discover Coga's generated skill view.
+.claude/skills/coga
+.codex/skills/coga
+# coga-local state: vendored CLI/venv (`.coga/bin`, `.coga/.venv`).
+.coga/
+# <<< coga-managed <<<
