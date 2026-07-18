@@ -1,7 +1,7 @@
 ---
 slug: surprise-lunch/define-cli-and-configuration-contract
 title: Define CLI and configuration contract
-status: blocked
+status: active
 owner: nicktoper
 human: nicktoper
 agent: codex
@@ -273,4 +273,5 @@ follow-up Git sync reports that mount error.
 - [x] [2026-07-17 21:08] [agent:codex] id=20260717T210855 GitHub publication is unavailable: coga open-pr cannot fetch origin/main because github.com DNS resolution fails. Restore GitHub network access, then rerun coga open-pr from the primary control checkout; do not bump until pr: is recorded.
   resolved: [2026-07-17 21:12] [human:nicktoper] network is here
 
-- [ ] [2026-07-17 21:14] [agent:codex] id=20260717T211419 GitHub publication is still unavailable in this session: coga open-pr cannot fetch origin/main because github.com DNS resolution fails. Restore outbound DNS/network access for terminal git in this sandbox, then rerun coga open-pr from the primary control checkout; do not bump until pr: is recorded.
+- [x] [2026-07-17 21:14] [agent:codex] id=20260717T211419 GitHub publication is still unavailable in this session: coga open-pr cannot fetch origin/main because github.com DNS resolution fails. Restore outbound DNS/network access for terminal git in this sandbox, then rerun coga open-pr from the primary control checkout; do not bump until pr: is recorded.
+  resolved: [2026-07-17 22:15] [human:nicktoper] GitHub access restored
