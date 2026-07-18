@@ -160,31 +160,3 @@ provider-specific concerns begin with
 <!-- coga:blackboard -->
 
 The blackboard is a notepad to be written to often as the human and agent works through a task.
-
-## Ticket authoring notes
-
-- Human corrected the implementation language from TypeScript to Python.
-- Human chose an adjacent placeholder-only example and retained the platform
-  configuration directory for the real file.
-- Human assigned agent work to `codex` and approved `code/with-review` (Codex
-  implementation, Claude peer review, Codex PR publication, owner review).
-- Human confirmed that dry-run enters only the safe stub and live `order` fails
-  explicitly until a later provider ticket implements it.
-- `coga validate --task surprise-lunch/define-cli-and-configuration-contract`
-  passes; its draft-only workflow-freeze and authoring-note warnings are expected
-  until first launch and final authoring cleanup, respectively.
-
-## Evaluator review
-
-The ticket has a coherent objective, safety boundary, and out-of-scope line. An implementation agent can start, but the “stable contract” still requires several consequential choices that are currently implicit:
-
-- Resolve command precedence: if live ordering is disabled, plain `order` should presumably fail with “live ordering disabled,” not “provider not implemented.” Define when the latter diagnostic applies. Also define how the configured dry-run default interacts with explicit `order` versus `order --dry-run`.
-- State whether dry-run must satisfy every live-only field, including recipient contact, saved payment selector, and live enablement, or whether validation is mode-specific.
-- Make configuration discovery deterministic: exact Linux/macOS/Windows path rules, behavior when XDG variables are absent, and any supported test/config-path override. Clarify that the adjacent example is packaged and documented but never used as runtime fallback.
-- Either specify the TOML schema and validation semantics or explicitly delegate them to the implementer. Important cases include money representation/currency, tip variants, delivery-window format, allow/deny conflicts, placeholder sentinels, path expansion, and the meaning of permitted price distance.
-- Define observable CLI behavior: dry-run stub exit status/output, live failure exit status, and stdout versus stderr. The “cannot reach a purchase action” test otherwise risks being vacuous because no purchase implementation exists; require an injectable/spied provider boundary or equivalent proof.
-- Clarify the redaction contract. Field-specific diagnostics should name fields without echoing values, especially address/contact data, and the ticket should say whether this scaffold must introduce logging or only ensure any emitted diagnostics are safe.
-
-`code/with-review` fits this cohesive, moderate-sized foundation change: implementation, independent peer review, PR publication, and owner review are appropriate, and the configured `codex`/`claude` pair makes `other-agent` unambiguous. The package scaffold, config model, CLI stub, tests, and README belong together; the scope remains reasonable as long as provider behavior stays stub-only.
-
-`surprise-lunch/spec` is broad but justified because its configuration, secrets, and safety requirements directly define this contract. No additional browser context is needed. Because the attached spec also mandates API/terms research and browser rules, explicitly state that public-API evaluation, terms rechecking, DOM automation, discovery, and checkout belong to the provider ticket; otherwise a future agent could reasonably expand this ticket beyond its intended scope.
