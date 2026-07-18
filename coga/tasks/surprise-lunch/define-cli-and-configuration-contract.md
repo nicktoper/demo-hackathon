@@ -1,7 +1,7 @@
 ---
 slug: surprise-lunch/define-cli-and-configuration-contract
 title: Define CLI and configuration contract
-status: in_progress
+status: blocked
 owner: nicktoper
 human: nicktoper
 agent: codex
@@ -29,7 +29,7 @@ workflow:
     assignee: owner
 secrets: null
 script: null
-step: 2 (peer-review)
+step: 3 (open-pr)
 ---
 
 ## Description
@@ -213,9 +213,10 @@ worktree: /tmp/demo-hackathon-surprise-lunch-cli
   `surprise_lunch-0.1.0-py3-none-any.whl` with the cached setuptools backend.
   Installed the wheel into an isolated venv and verified both the
   `surprise-lunch` entry point and packaged `config.example.toml`.
-- Commit: `bc8c193` (`Scaffold surprise lunch CLI contract`).
+- Implementation commit after rebase: `543f0f7` (`Scaffold surprise lunch CLI
+  contract`).
 - `git fetch origin main && git rebase FETCH_HEAD`: branch is up to date with
-  `5856930`; no push or PR was performed.
+  `3893c15`; no push or PR was performed.
 
 ## Git metadata repair
 
@@ -226,6 +227,39 @@ required fetch/rebase now succeeds. The protected primary `.git` remains a
 control-checkout limitation; Coga state writes succeed on disk even when their
 follow-up Git sync reports that mount error.
 
+## Peer review
+
+- Native `codex review --base main` completed against the clean implementation
+  commit and reported four fail-loud boundary findings: invalid UTF-8 escaped
+  the configuration error path, environment-backed discovery eagerly resolved
+  the home directory, NUL-containing browser paths were accepted, and mixed
+  Unicode/ASCII time digits could raise an uncaught `ValueError`.
+- Fixed all four findings with focused regression coverage in `3b36d69`
+  (`peer-review: apply review findings`); no design rethink was required.
+- After the unconditional fetch/rebase onto `origin/main` at `3893c15`, the
+  branch is clean and two commits ahead. `python -m pytest` and
+  `python -X dev -m pytest -W error` each pass all 98 tests;
+  `python -m compileall -q src tests` and `git diff --check` also pass.
+
+## PR
+
+### Summary
+
+- Add an installable Python 3.11 `surprise-lunch` command with deterministic
+  `order` and `order --dry-run` mode resolution and documented exit codes.
+- Define the typed, platform-discovered TOML configuration contract with strict,
+  value-free validation for delivery, budget, tip, food, preference, profile,
+  payment-label, and live-ordering safety fields.
+- Keep the provider seam deliberately inert: dry runs reach only a preview stub,
+  while every live path refuses before provider construction or purchase logic.
+- Package a placeholder-only example configuration and cover malformed input,
+  secret rejection, redaction, mode precedence, and provider isolation with
+  deterministic tests.
+
+### Test plan
+
+`python -m pytest` — 98 passed.
+
 ---
 
 ## Blockers
@@ -235,3 +269,5 @@ follow-up Git sync reports that mount error.
 
 - [x] [2026-07-17 19:23] [agent:codex] id=20260717T192353 Git metadata is mounted read-only: staging fails creating the feature worktree index.lock (/home/n/Code/demo-hackathon/.git/worktrees/demo-hackathon-surprise-lunch-cli/index.lock). Relaunch with writable local Git metadata so the tested source in /tmp/demo-hackathon-surprise-lunch-cli can be committed and rebased onto origin/main before handoff.
   resolved: [2026-07-17 20:34] [human:nicktoper] Human authorized repairing the existing feature checkout by replacing its read-only registered-worktree metadata with writable local Git metadata under /tmp, preserving the implemented source, then committing, testing, and freshening the branch before handoff.
+
+- [ ] [2026-07-17 21:08] [agent:codex] id=20260717T210855 GitHub publication is unavailable: coga open-pr cannot fetch origin/main because github.com DNS resolution fails. Restore GitHub network access, then rerun coga open-pr from the primary control checkout; do not bump until pr: is recorded.
