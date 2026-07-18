@@ -1,7 +1,7 @@
 ---
 slug: surprise-lunch/define-cli-and-configuration-contract
 title: Define CLI and configuration contract
-status: in_progress
+status: blocked
 owner: nicktoper
 human: nicktoper
 agent: codex
@@ -232,3 +232,5 @@ or published.
 ## Blockers
 
 - [ ] [2026-07-17 17:45] [agent:codex] id=20260717T174541 Git metadata is mounted read-only: staging fails creating the feature worktree index.lock. Relaunch with writable local Git metadata so the tested source can be committed and freshened before handoff.
+
+- [ ] [2026-07-17 19:23] [agent:codex] id=20260717T192353 Git metadata is mounted read-only: staging fails creating the feature worktree index.lock (/home/n/Code/demo-hackathon/.git/worktrees/demo-hackathon-surprise-lunch-cli/index.lock). Relaunch with writable local Git metadata so the tested source in /tmp/demo-hackathon-surprise-lunch-cli can be committed and rebased onto origin/main before handoff.
