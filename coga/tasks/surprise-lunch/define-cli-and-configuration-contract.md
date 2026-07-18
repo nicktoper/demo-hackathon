@@ -1,7 +1,7 @@
 ---
 slug: surprise-lunch/define-cli-and-configuration-contract
 title: Define CLI and configuration contract
-status: blocked
+status: active
 owner: nicktoper
 human: nicktoper
 agent: codex
@@ -270,4 +270,5 @@ follow-up Git sync reports that mount error.
 - [x] [2026-07-17 19:23] [agent:codex] id=20260717T192353 Git metadata is mounted read-only: staging fails creating the feature worktree index.lock (/home/n/Code/demo-hackathon/.git/worktrees/demo-hackathon-surprise-lunch-cli/index.lock). Relaunch with writable local Git metadata so the tested source in /tmp/demo-hackathon-surprise-lunch-cli can be committed and rebased onto origin/main before handoff.
   resolved: [2026-07-17 20:34] [human:nicktoper] Human authorized repairing the existing feature checkout by replacing its read-only registered-worktree metadata with writable local Git metadata under /tmp, preserving the implemented source, then committing, testing, and freshening the branch before handoff.
 
-- [ ] [2026-07-17 21:08] [agent:codex] id=20260717T210855 GitHub publication is unavailable: coga open-pr cannot fetch origin/main because github.com DNS resolution fails. Restore GitHub network access, then rerun coga open-pr from the primary control checkout; do not bump until pr: is recorded.
+- [x] [2026-07-17 21:08] [agent:codex] id=20260717T210855 GitHub publication is unavailable: coga open-pr cannot fetch origin/main because github.com DNS resolution fails. Restore GitHub network access, then rerun coga open-pr from the primary control checkout; do not bump until pr: is recorded.
+  resolved: [2026-07-17 21:12] [human:nicktoper] network is here
