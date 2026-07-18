@@ -1,7 +1,7 @@
 ---
 slug: surprise-lunch/define-cli-and-configuration-contract
 title: Define CLI and configuration contract
-status: blocked
+status: active
 owner: nicktoper
 human: nicktoper
 agent: codex
