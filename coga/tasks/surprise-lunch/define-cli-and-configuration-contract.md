@@ -1,17 +1,35 @@
 ---
 slug: surprise-lunch/define-cli-and-configuration-contract
 title: Define CLI and configuration contract
-status: draft
+status: active
 owner: nicktoper
 human: nicktoper
 agent: codex
 assignee: codex
 contexts:
-  - surprise-lunch/spec
+- surprise-lunch/spec
 skills: []
-workflow: code/with-review
+workflow:
+  name: code/with-review
+  steps:
+  - name: implement
+    skills:
+    - code/implement
+    assignee: agent
+  - name: peer-review
+    skills: []
+    assignee: other-agent
+  - name: open-pr
+    skills:
+    - code/open-pr
+    assignee: agent
+    requires: pr
+  - name: review
+    skills: []
+    assignee: owner
 secrets: null
 script: null
+step: 1 (implement)
 ---
 
 ## Description
