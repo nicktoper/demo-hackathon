@@ -1,7 +1,7 @@
 ---
 slug: surprise-lunch/define-cli-and-configuration-contract
 title: Define CLI and configuration contract
-status: in_progress
+status: blocked
 owner: nicktoper
 human: nicktoper
 agent: codex
@@ -178,3 +178,57 @@ provider-specific concerns begin with
 <!-- coga:blackboard -->
 
 The blackboard is a notepad to be written to often as the human and agent works through a task.
+
+## Dev
+
+branch: feat/surprise-lunch-cli
+worktree: /tmp/demo-hackathon-surprise-lunch-cli
+
+## Implementation notes
+
+- Use Python 3.11 and a `src/` package with stdlib TOML, typed dataclasses,
+  `Decimal`, `zoneinfo`, and tested platform-specific config discovery.
+- Keep the provider boundary inert: dry-run may call only a dedicated preview
+  stub; every live path refuses before provider construction.
+- Keep runtime dependencies minimal; add `tzdata` only on Windows so IANA
+  timezone validation remains portable. Playwright belongs to the next ticket.
+
+## Implemented (uncommitted)
+
+- Added the installable `surprise-lunch` Python 3.11 package, console entry
+  point, packaged placeholder configuration, platform config discovery, typed
+  TOML model, value-free diagnostics, documented exit codes, and README.
+- Added an inert dry-run-only provider protocol. Explicit/configured dry runs
+  can call only `dry_run`; disabled, incomplete, and providerless live paths
+  refuse before provider construction.
+- Added strict validation for versioning, positive diners, delivery windows,
+  IANA timezone, Decimal money strings, tip policy, explicit food/preference
+  arrays, duplicate/conflicting preferences, absolute persistent profiles,
+  live-only fields, unknown/credential keys, placeholders, and payment data
+  disguised as a saved-method label.
+- `python -m pytest`: 93 passed.
+- `python -X dev -m pytest -W error`: 93 passed.
+- `python -m compileall -q src tests` and `git diff --check`: passed.
+- A distribution build could not be exercised in this sandbox because neither
+  `build` nor a PEP 517 backend is installed locally and the package index is
+  unreachable. The declared setuptools metadata and packaged-resource mapping
+  remain covered by source tests.
+
+## Blocker
+
+The feature source is ready in `/tmp/demo-hackathon-surprise-lunch-cli`, but the
+session mounts `/home/n/Code/demo-hackathon/.git` read-only. `git add` fails at
+the registered worktree metadata with:
+
+`fatal: Unable to create '/home/n/Code/demo-hackathon/.git/worktrees/demo-hackathon-surprise-lunch-cli/index.lock': Read-only file system`
+
+Git metadata must be made writable (or the session relaunched with normal local
+Git write access) so the changes can be staged, committed, rebased onto the
+latest `origin/main`, and handed to the next workflow step. Nothing was pushed
+or published.
+
+---
+
+## Blockers
+
+- [ ] [2026-07-17 17:45] [agent:codex] id=20260717T174541 Git metadata is mounted read-only: staging fails creating the feature worktree index.lock. Relaunch with writable local Git metadata so the tested source can be committed and freshened before handoff.
