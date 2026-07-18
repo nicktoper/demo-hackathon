@@ -260,6 +260,15 @@ follow-up Git sync reports that mount error.
 
 `python -m pytest` — 98 passed.
 
+## Publication attempt
+
+- [2026-07-17] The open-PR step could not start any local command because the
+  sandbox launcher fails before execution with
+  `bwrap: execvp /home/n/.codex/packages/standalone/releases/0.144.5-x86_64-unknown-linux-musl/bin/codex: No such file or directory`.
+- Retried with both a non-login shell and a PTY; even `pwd` fails identically.
+- Connected GitHub state confirms `feat/surprise-lunch-cli` is not pushed and
+  no PR exists. No `pr:` line was recorded and the workflow was not bumped.
+
 ---
 
 ## Blockers
