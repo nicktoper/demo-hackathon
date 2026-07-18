@@ -4,7 +4,7 @@ title: Discover DoorDash promotions and restaurants
 status: draft
 owner: nicktoper
 human: nicktoper
-agent: claude
+agent: codex
 assignee: nicktoper
 contexts:
   - surprise-lunch/spec

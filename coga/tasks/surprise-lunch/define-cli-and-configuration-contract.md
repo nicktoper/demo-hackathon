@@ -29,7 +29,7 @@ workflow:
     assignee: owner
 secrets: null
 script: null
-step: 1 (implement)
+step: 2 (peer-review)
 ---
 
 ## Description
@@ -193,7 +193,7 @@ worktree: /tmp/demo-hackathon-surprise-lunch-cli
 - Keep runtime dependencies minimal; add `tzdata` only on Windows so IANA
   timezone validation remains portable. Playwright belongs to the next ticket.
 
-## Implemented (uncommitted)
+## Implemented
 
 - Added the installable `surprise-lunch` Python 3.11 package, console entry
   point, packaged placeholder configuration, platform config discovery, typed
@@ -209,28 +209,29 @@ worktree: /tmp/demo-hackathon-surprise-lunch-cli
 - `python -m pytest`: 93 passed.
 - `python -X dev -m pytest -W error`: 93 passed.
 - `python -m compileall -q src tests` and `git diff --check`: passed.
-- A distribution build could not be exercised in this sandbox because neither
-  `build` nor a PEP 517 backend is installed locally and the package index is
-  unreachable. The declared setuptools metadata and packaged-resource mapping
-  remain covered by source tests.
+- Built `surprise_lunch-0.1.0.tar.gz` and
+  `surprise_lunch-0.1.0-py3-none-any.whl` with the cached setuptools backend.
+  Installed the wheel into an isolated venv and verified both the
+  `surprise-lunch` entry point and packaged `config.example.toml`.
+- Commit: `bc8c193` (`Scaffold surprise lunch CLI contract`).
+- `git fetch origin main && git rebase FETCH_HEAD`: branch is up to date with
+  `5856930`; no push or PR was performed.
 
-## Blocker
+## Git metadata repair
 
-The feature source is ready in `/tmp/demo-hackathon-surprise-lunch-cli`, but the
-session mounts `/home/n/Code/demo-hackathon/.git` read-only. `git add` fails at
-the registered worktree metadata with:
-
-`fatal: Unable to create '/home/n/Code/demo-hackathon/.git/worktrees/demo-hackathon-surprise-lunch-cli/index.lock': Read-only file system`
-
-Git metadata must be made writable (or the session relaunched with normal local
-Git write access) so the changes can be staged, committed, rebased onto the
-latest `origin/main`, and handed to the next workflow step. Nothing was pushed
-or published.
+With human approval, preserved the source and replaced the broken registered
+worktree with an independent writable clone at the same recorded path and
+branch. Its `origin` points to GitHub, the implementation is committed, and the
+required fetch/rebase now succeeds. The protected primary `.git` remains a
+control-checkout limitation; Coga state writes succeed on disk even when their
+follow-up Git sync reports that mount error.
 
 ---
 
 ## Blockers
 
-- [ ] [2026-07-17 17:45] [agent:codex] id=20260717T174541 Git metadata is mounted read-only: staging fails creating the feature worktree index.lock. Relaunch with writable local Git metadata so the tested source can be committed and freshened before handoff.
+- [x] [2026-07-17 17:45] [agent:codex] id=20260717T174541 Git metadata is mounted read-only: staging fails creating the feature worktree index.lock. Relaunch with writable local Git metadata so the tested source can be committed and freshened before handoff.
+  resolved: [2026-07-17 20:34] [human:nicktoper] Human authorized repairing the existing feature checkout by replacing its read-only registered-worktree metadata with writable local Git metadata under /tmp, preserving the implemented source, then committing, testing, and freshening the branch before handoff.
 
-- [ ] [2026-07-17 19:23] [agent:codex] id=20260717T192353 Git metadata is mounted read-only: staging fails creating the feature worktree index.lock (/home/n/Code/demo-hackathon/.git/worktrees/demo-hackathon-surprise-lunch-cli/index.lock). Relaunch with writable local Git metadata so the tested source in /tmp/demo-hackathon-surprise-lunch-cli can be committed and rebased onto origin/main before handoff.
+- [x] [2026-07-17 19:23] [agent:codex] id=20260717T192353 Git metadata is mounted read-only: staging fails creating the feature worktree index.lock (/home/n/Code/demo-hackathon/.git/worktrees/demo-hackathon-surprise-lunch-cli/index.lock). Relaunch with writable local Git metadata so the tested source in /tmp/demo-hackathon-surprise-lunch-cli can be committed and rebased onto origin/main before handoff.
+  resolved: [2026-07-17 20:34] [human:nicktoper] Human authorized repairing the existing feature checkout by replacing its read-only registered-worktree metadata with writable local Git metadata under /tmp, preserving the implemented source, then committing, testing, and freshening the branch before handoff.

@@ -4,7 +4,7 @@ title: Optimize a surprise meal for two
 status: draft
 owner: nicktoper
 human: nicktoper
-agent: claude
+agent: codex
 assignee: nicktoper
 contexts:
   - surprise-lunch/spec

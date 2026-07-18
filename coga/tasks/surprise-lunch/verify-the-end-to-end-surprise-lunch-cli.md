@@ -4,7 +4,7 @@ title: Verify the end-to-end surprise lunch CLI
 status: draft
 owner: nicktoper
 human: nicktoper
-agent: claude
+agent: codex
 assignee: nicktoper
 contexts:
   - surprise-lunch/spec

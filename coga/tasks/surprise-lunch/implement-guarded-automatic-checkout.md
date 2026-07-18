@@ -4,7 +4,7 @@ title: Implement guarded automatic checkout
 status: draft
 owner: nicktoper
 human: nicktoper
-agent: claude
+agent: codex
 assignee: nicktoper
 contexts:
   - surprise-lunch/spec
