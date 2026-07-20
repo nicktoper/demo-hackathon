@@ -112,3 +112,4 @@
 2026-07-20 16:41 [recurring/branch-sweep] [system] launched as a script (skill=coga/branch-sweep/sweep, script=run.py)
 2026-07-20 16:41 [recurring/branch-sweep] [system] script exited with code 0
 2026-07-20 16:41 [recurring/branch-sweep] [system] completed (final script step ran) via coga launch
+2026-07-20 16:41 [recurring/autoclose-merged] [system] started (active → in_progress) via coga launch
