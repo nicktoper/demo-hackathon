@@ -120,3 +120,8 @@
 2026-07-20 16:41 [recurring/rebase-stale-worktrees] [human:nicktoper] launched (assignee=claude, agent=claude)
 2026-07-20 16:45 [recurring/rebase-stale-worktrees] [human:nicktoper] task done — 1 live branch: feat/surprise-lunch-cli rebased-local (clean, 98 tests pass), not pushed (no PR remote). Unblocks surprise-lunch/define-cli-and-configuration-contract open-pr.
 2026-07-20 16:45 [recurring/rebase-stale-worktrees] [system] {"agent":"claude","agent_turns":14,"cache_creation_input_tokens":122326,"cache_read_input_tokens":1976296,"cli":"claude","content_status":"ok","elapsed_seconds":241.546438,"ended_at":"2026-07-20T23:45:12.016436Z","human_turns":0,"input_tokens":86,"model":"claude-opus-4-8","outcome":"Summary recorded. Let me do a final stability check on the worktree, then mark the task done.","outcome_status":"completed","output_tokens":43819,"provider":"anthropic","request":null,"schema":2,"session_id":"e1a551cd-01aa-4102-9e37-404359fbaef1","slug":"recurring/rebase-stale-worktrees","started_at":"2026-07-20T23:41:10.469998Z","step":"execute","title":"Rebase stale worktrees","ts":"2026-07-20T23:45:12.016436Z","usage_status":"ok"}
+2026-07-20 16:45 [coga] [git] sync failed: `git fetch origin main` failed (exit 1): From https://github.com/nicktoper/demo-hackathon
+ * branch            main       -> FETCH_HEAD
+error: cannot lock ref 'refs/remotes/origin/main': is at 0ecc238d085b8da0ac3e685f8db3cf51ec377540 but expected c2a39c9c985ad5588ffec934afe1f204a98dcc50
+ ! c2a39c9..0ecc238  main       -> origin/main  (unable to update local ref)
+2026-07-20 16:45 [recurring/digest] [system] started (active → in_progress) via coga launch
