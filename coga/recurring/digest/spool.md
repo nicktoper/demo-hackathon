@@ -15,3 +15,6 @@ context. The git high-water mark lives separately in the digest ticket's
 ## Spool (pending)
 
 consumed_through:
+{"id":"d7b0da86b7b6","ts":"2026-07-20T16:41","project":"demo-hackathon","kind":"done","detail":"→ done (script)","ticket":"recurring/branch-sweep","owner":"nicktoper"}
+{"id":"7c06f73aafbd","ts":"2026-07-20T16:41","project":"demo-hackathon","kind":"done","detail":"→ done (script)","ticket":"recurring/autoclose-merged","owner":"nicktoper"}
+{"id":"5f013a22077d","ts":"2026-07-20T16:45","project":"demo-hackathon","kind":"done","detail":"claude finished: execute → done ✅ — 1 live branch: feat/surprise-lunch-cli rebased-local (clean, 98 tests pass), not pushed (no PR remote). Unblocks surprise-lunch/define-cli-and-configuration-contract open-pr.","ticket":"recurring/rebase-stale-worktrees","owner":"nicktoper"}

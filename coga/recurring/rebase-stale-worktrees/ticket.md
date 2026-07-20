@@ -73,3 +73,10 @@ abandoned or already-merged residue — branch-sweep's problem, not this task's.
 section below with its results.
 
 last_serviced_period: 2026-W30
+
+## Rebase Run Summary
+
+- `feat/surprise-lunch-cli`: rebased-local — clean rebase onto origin/main
+  (was 34 behind, 2 own commits), 98 tests pass under py3.12. Not pushed: no
+  feature-branch remote/PR exists (branch upstream is origin/main, which must
+  not be pushed). Unblocks: `coga launch surprise-lunch/define-cli-and-configuration-contract` (open-pr step).
