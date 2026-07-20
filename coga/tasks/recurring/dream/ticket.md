@@ -261,7 +261,8 @@ Dream run for period 2026-W30. Started 2026-07-20.
 - **Phase 5 — cleanup-orphan-markers: DONE (no-op).** Zero candidates — no
   `## Retro` marker exists on any task directory (Phase 4 knowledge PRs would
   create them, and there were none). Nothing to clean up.
-- Phase 6 — disposition + summary: in progress.
+- **Phase 6 — disposition + summary: DONE.** D1 drift → proposal PR #1; G1 & G2
+  gaps → draft tickets; extract/stale → none. Summary below.
 
 ## Findings
 
@@ -299,3 +300,34 @@ Dream run for period 2026-W30. Started 2026-07-20.
 - Everything else on the living contract surface checks out (CLAUDE.md/AGENTS.md
   commands verified against `coga --help`; all recurring workflow/skill refs
   resolve; contexts clean; CLI 0.3.0, no version skew; validate 14/14).
+
+## Dream Run Summary
+
+Generated: 2026-07-20T23:58Z · period 2026-W30
+
+| Phase | Result | Detail |
+|-------|--------|--------|
+| 1 · validate-drift | no-op | `coga validate --json` → 14 ok, 0 issues, 0 fixes |
+| 2 · knowledge scan | reported | extract 0, stale 0, gap 2 (both low-confidence) |
+| 3 · contract audit | reported | drift 1 (Dream template Phase 4 vs packaged) |
+| 4 · retro/done-ticket | direct-fixed | 6 period tickets direct-deleted, 0 knowledge PRs |
+| 5 · cleanup-orphan-markers | no-op | 0 candidates (no `## Retro` markers on disk) |
+| 6 · disposition | proposed | 1 proposal PR + 2 gap draft tickets |
+
+**Findings routed (all findings have a durable home):**
+
+- drift D1 → **PR #1** https://github.com/nicktoper/demo-hackathon/pull/1 —
+  resync Dream template Phase 4 to packaged isolated-checkout Retro guidance.
+  `pr-required`; human confirms whether the simplification was intentional.
+- gap G1 → draft ticket `capture-control-checkout-git-limitation-and-worktr`
+  (low confidence; may be environmental noise).
+- gap G2 → draft ticket `populate-the-base-repo-context-stub` (minor).
+- extract: none · stale: none.
+
+**Phase 4 direct-deletes** (recurring period tickets, nothing durable; recovery
+via `git restore`): branch-sweep, blocker-reminders, digest,
+rebase-stale-worktrees, skill-update, autoclose-merged. Deletions committed and
+pushed to `origin/main` (tip `6687b25`).
+
+**Human review gates:** PR #1 (do not auto-merge); 2 gap drafts await
+owner accept/dismiss. No blockers.

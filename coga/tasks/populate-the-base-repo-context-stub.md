@@ -33,7 +33,17 @@ step: 1 (implement)
 
 ## Description
 
+**Source:** Dream 2026-W30 knowledge-scan gap finding G2 (minor / low value in a
+demo repo — safe to close).
 
+`coga/context.md` is still the stock stub ("Describe what this repo is, who
+works on it…") yet it is composed into every launched prompt. The repo's actual
+identity — a coga demo whose live deliverable is the `surprise-lunch` DoorDash
+CLI, agent `codex`, owner `nicktoper` — lives only scattered across tickets,
+with no durable base-context carrier.
+
+**Decision to make:** populate `coga/context.md` with the repo's real identity
+and defaults, or leave the stub as-is for the demo.
 
 ## Context
 
