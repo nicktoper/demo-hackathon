@@ -128,3 +128,4 @@ error: cannot lock ref 'refs/remotes/origin/main': is at 0ecc238d085b8da0ac3e685
 2026-07-20 16:45 [recurring/digest] [system] launched as a script (skill=coga/digest/flush, script=run.py)
 2026-07-20 16:45 [recurring/digest] [system] script exited with code 0
 2026-07-20 16:45 [recurring/digest] [system] completed (final script step ran) via coga launch
+2026-07-20 16:45 [recurring/skill-update] [system] started (active → in_progress) via coga launch
