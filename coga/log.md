@@ -108,3 +108,4 @@
 2026-07-20 16:40 [recurring/rebase-stale-worktrees] [system] created recurring/rebase-stale-worktrees for 2026-W30
 2026-07-20 16:40 [recurring/skill-update] [system] created (status=active)
 2026-07-20 16:40 [recurring/skill-update] [system] created recurring/skill-update for 2026-W30
+2026-07-20 16:41 [recurring/branch-sweep] [system] started (active → in_progress) via coga launch
