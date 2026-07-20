@@ -137,3 +137,4 @@ error: cannot lock ref 'refs/remotes/origin/main': is at 0ecc238d085b8da0ac3e685
 2026-07-20 16:45 [recurring/blocker-reminders] [system] script exited with code 0
 2026-07-20 16:45 [recurring/blocker-reminders] [system] completed (final script step ran) via coga launch
 2026-07-20 16:45 [recurring/dream] [human:nicktoper] started (active → in_progress) via coga launch
+2026-07-20 16:45 [recurring/dream] [human:nicktoper] launched (assignee=claude, agent=claude)
