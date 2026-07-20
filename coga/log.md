@@ -125,3 +125,6 @@
 error: cannot lock ref 'refs/remotes/origin/main': is at 0ecc238d085b8da0ac3e685f8db3cf51ec377540 but expected c2a39c9c985ad5588ffec934afe1f204a98dcc50
  ! c2a39c9..0ecc238  main       -> origin/main  (unable to update local ref)
 2026-07-20 16:45 [recurring/digest] [system] started (active → in_progress) via coga launch
+2026-07-20 16:45 [recurring/digest] [system] launched as a script (skill=coga/digest/flush, script=run.py)
+2026-07-20 16:45 [recurring/digest] [system] script exited with code 0
+2026-07-20 16:45 [recurring/digest] [system] completed (final script step ran) via coga launch
