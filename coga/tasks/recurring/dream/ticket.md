@@ -252,11 +252,16 @@ Dream run for period 2026-W30. Started 2026-07-20.
   to repair, so no child repair branch needed.
 - Phase 2 — knowledge scan: in progress (subagent).
 - Phase 3 — contract audit: in progress (subagent).
-- Phase 4 — retro/done-ticket: pending. 6 eligible done tickets, all recurring
-  period tickets (blocker-reminders, digest, rebase-stale-worktrees,
-  skill-update, autoclose-merged, branch-sweep).
-- Phase 5 — cleanup-orphan-markers: pending.
-- Phase 6 — disposition + summary: pending.
+- **Phase 4 — retro/done-ticket: DONE.** Knowledge scan found extract=none
+  across all 6 done tickets (all recurring period tickets), so Retro reduced to
+  direct-delete of all 6: branch-sweep, blocker-reminders, digest,
+  rebase-stale-worktrees, skill-update, autoclose-merged. No knowledge PR, no
+  `## Retro` markers. Each a `coga delete` (git rm + `Ticket: <slug> — deleted`
+  commit); recovery via `git restore`.
+- **Phase 5 — cleanup-orphan-markers: DONE (no-op).** Zero candidates — no
+  `## Retro` marker exists on any task directory (Phase 4 knowledge PRs would
+  create them, and there were none). Nothing to clean up.
+- Phase 6 — disposition + summary: in progress.
 
 ## Findings
 
