@@ -117,3 +117,5 @@
 2026-07-20 16:41 [recurring/autoclose-merged] [system] script exited with code 0
 2026-07-20 16:41 [recurring/autoclose-merged] [system] completed (final script step ran) via coga launch
 2026-07-20 16:41 [recurring/rebase-stale-worktrees] [human:nicktoper] started (active → in_progress) via coga launch
+2026-07-20 16:41 [recurring/rebase-stale-worktrees] [human:nicktoper] launched (assignee=claude, agent=claude)
+2026-07-20 16:45 [recurring/rebase-stale-worktrees] [human:nicktoper] task done — 1 live branch: feat/surprise-lunch-cli rebased-local (clean, 98 tests pass), not pushed (no PR remote). Unblocks surprise-lunch/define-cli-and-configuration-contract open-pr.
