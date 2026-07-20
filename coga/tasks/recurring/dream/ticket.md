@@ -243,4 +243,54 @@ Git history preserves the completed run.
 
 <!-- coga:blackboard -->
 
-The blackboard is a notepad to be written to often as the human and agent works through a task.
+Dream run for period 2026-W30. Started 2026-07-20.
+
+## Progress
+
+- **Phase 1 — validate-drift: DONE (no-op).** `coga validate --json` → 14 ok,
+  0 issues, 0 fixes. Ran the deterministic validator surface directly; nothing
+  to repair, so no child repair branch needed.
+- Phase 2 — knowledge scan: in progress (subagent).
+- Phase 3 — contract audit: in progress (subagent).
+- Phase 4 — retro/done-ticket: pending. 6 eligible done tickets, all recurring
+  period tickets (blocker-reminders, digest, rebase-stale-worktrees,
+  skill-update, autoclose-merged, branch-sweep).
+- Phase 5 — cleanup-orphan-markers: pending.
+- Phase 6 — disposition + summary: pending.
+
+## Findings
+
+### Phase 2 — knowledge scan (done)
+
+- **extract: none.** All 6 done tickets are recurring period tickets; their
+  blackboards carry only operational output (digest post, skill-update status,
+  rebase summary), nothing durable to lift into a context/skill.
+- **stale: none.** No context/skill contradicts repo reality.
+- **gap G1 (low confidence):** Repeated open-PR / control-checkout blockage has
+  no durable carrier. `surprise-lunch/define-cli-and-configuration-contract`
+  records read-only git metadata in the registered worktree, a broken `codex`
+  sandbox launcher, and GitHub DNS failures + an ad-hoc human-approved recovery
+  (replace read-only worktree metadata with a writable `/tmp` clone).
+  `recurring/rebase-stale-worktrees` independently reports `feat/surprise-lunch-cli`
+  stuck local-only. Candidate carrier: a `coga/contexts/dev/control-checkout`
+  note. Root causes read as environmental → borderline.
+- **gap G2 (minor):** `coga/context.md` is still the stock template stub yet is
+  composed into every prompt. Could be populated with the repo's real identity
+  (coga demo; surprise-lunch DoorDash CLI; agent codex; owner nicktoper).
+
+### Phase 3 — contract audit (done)
+
+- **drift D1:** Dream template Phase 4 body (`coga/recurring/dream/ticket.md`
+  ~lines 121–132) has diverged from the packaged canonical template
+  (`…/uv/tools/coga/lib/python3.12/…/resources/templates/coga/recurring/dream/ticket.md`).
+  Packaged version mandates an **isolated git worktree** for the whole Retro
+  pass, `coga delete <slug> --keep-control-checkout`, copying gitignored
+  `coga.local.toml` into the isolated checkout, and warns "Do not run Retro in
+  Dream's checkout." Repo body uses plain `coga delete <slug>` in one subagent.
+  Both `coga delete` forms + `--keep-control-checkout` exist in CLI 0.3.0, so no
+  unbacked claim — but the dispatch contract is materially behind the packaged
+  isolation/safety guidance and the simplification is undocumented. Possibly an
+  intentional demo simplification → **proposal PR, human confirms.**
+- Everything else on the living contract surface checks out (CLAUDE.md/AGENTS.md
+  commands verified against `coga --help`; all recurring workflow/skill refs
+  resolve; contexts clean; CLI 0.3.0, no version skew; validate 14/14).

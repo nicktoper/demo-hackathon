@@ -18,3 +18,5 @@ context. The git high-water mark lives separately in the digest ticket's
 consumed_through: 5f013a22077d
 {"id":"5f013a22077d","ts":"2026-07-20T16:45","project":"demo-hackathon","kind":"done","detail":"claude finished: execute → done ✅ — 1 live branch: feat/surprise-lunch-cli rebased-local (clean, 98 tests pass), not pushed (no PR remote). Unblocks surprise-lunch/define-cli-and-configuration-contract open-pr.","ticket":"recurring/rebase-stale-worktrees","owner":"nicktoper"}
 {"id":"501ef0ccdf99","ts":"2026-07-20T16:45","project":"demo-hackathon","kind":"done","detail":"→ done (script)","ticket":"recurring/digest","owner":"nick"}
+{"id":"7ca78ef90f03","ts":"2026-07-20T16:45","project":"demo-hackathon","kind":"done","detail":"→ done (script)","ticket":"recurring/skill-update","owner":"nicktoper"}
+{"id":"f14746303110","ts":"2026-07-20T16:45","project":"demo-hackathon","kind":"done","detail":"→ done (script)","ticket":"recurring/blocker-reminders","owner":"nicktoper"}
