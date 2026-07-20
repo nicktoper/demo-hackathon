@@ -20,3 +20,4 @@ consumed_through: 5f013a22077d
 {"id":"501ef0ccdf99","ts":"2026-07-20T16:45","project":"demo-hackathon","kind":"done","detail":"→ done (script)","ticket":"recurring/digest","owner":"nick"}
 {"id":"7ca78ef90f03","ts":"2026-07-20T16:45","project":"demo-hackathon","kind":"done","detail":"→ done (script)","ticket":"recurring/skill-update","owner":"nicktoper"}
 {"id":"f14746303110","ts":"2026-07-20T16:45","project":"demo-hackathon","kind":"done","detail":"→ done (script)","ticket":"recurring/blocker-reminders","owner":"nicktoper"}
+{"id":"c089716062f3","ts":"2026-07-20T16:59","project":"demo-hackathon","kind":"done","detail":"claude finished: execute → done ✅ — Dream 2026-W30 complete: 6 period tickets retired, 1 drift PR (#1), 2 gap drafts, validate clean.","ticket":"recurring/dream","owner":"nicktoper"}
