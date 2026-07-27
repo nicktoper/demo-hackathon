@@ -1,7 +1,7 @@
 ---
 slug: recurring/autoclose-merged
 title: Autoclose merged tickets
-status: in_progress
+status: done
 owner: nicktoper
 human: nicktoper
 agent: claude
@@ -18,7 +18,6 @@ workflow:
     assignee: agent
 secrets: null
 script: null
-step: 1 (sweep)
 ---
 
 ## Description
@@ -51,3 +50,13 @@ no merged final-step tickets exits successfully and changes nothing.
 <!-- coga:blackboard -->
 
 The blackboard is a notepad to be written to often as the human and agent works through a task.
+
+## Run — period 2026-07-27
+
+- Read parent blackboard at `coga/recurring/autoclose-merged/ticket.md`:
+  `last_serviced_period: 2026-07-27`, no durable cross-run state to carry
+  (this recipe keeps none — its output is the tickets it marks done).
+- Ran `coga run autoclose`. Output: `[autoclose] no tickets bumped.`
+- Quiet day: no active/in-progress ticket had a merged PR on its final workflow
+  step, so nothing was closed and nothing spooled to the digest. Exit clean.
+- Nothing to persist back to the parent blackboard.
