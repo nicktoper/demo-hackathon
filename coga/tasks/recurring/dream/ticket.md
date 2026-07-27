@@ -345,3 +345,46 @@ six, no PR, no marker.
 not eight — K3+K4 (upstream digest fixes), K6+K13 (surprise-lunch reset),
 K7 (ADK disposition), K10 (Slack enablement). K5, K9, K14 are `human-needed`
 summary gates, not new tickets.
+
+### Phase 3 — contract audit (`reported`, 9 findings)
+
+Classes: 6 `drift`, 2 `stale`, 1 `gap`. Plus one operator-side note.
+
+| id | class | target | one-line | overlap |
+|---|---|---|---|---|
+| C1 `recurring-templates-missing-recipe-key` | drift | `coga/recurring/{autoclose-merged,blocker-reminders,branch-sweep,digest,skill-update}/ticket.md` | **Highest value.** Missing `recipe:` frontmatter → `recurring_runner.py:519` falls through to `launch_cmd`, spawning a full agent per job. `coga/log.md:162-185` confirms: branch-sweep 672k, digest 1187k, skill-update 653k cache-read tokens for work that should be agentless. | none |
+| C2 `dream-template-child-script-task-model` | drift | `coga/recurring/dream/ticket.md` | Same as K1. Packaged says run recipes directly, "Do not create child script tasks". | **PR #1**, disjoint hunks — stack on its branch |
+| C3 `repo-workflows-claim-script-step` | drift | `coga/workflows/{autoclose-merged/sweep,blocker-reminders/run,branch-sweep/sweep,skill-update/run}.md` | All four still say "Script step"; referenced skills dropped `script:`. No repo-local state — straight copy is safe. | none |
+| C4 `vestigial-dream-workflow-overrides` | drift | `coga/workflows/dream/*.md` | **This run's own `b19e5ba` workaround.** The package deleted these on purpose. They make the dead child-task path look live. Delete. | none |
+| C5 `orphan-dream-child-task` | stale | `coga/tasks/dream/validate-drift.md` | Same as K5. This run's `active` child task. | none |
+| C6 `claude-md-context-composition-claim` | drift | `CLAUDE.md` + `AGENTS.md` | Same as K8, plus: Common-commands list omits `coga run`, now the entry point for every recipe. Only auto-attach in the codebase is `coga/period-task` (`recurring.py:886-892`). | none |
+| C7 `direct-body-skill-copy-divergence` | drift | `coga/skills/direct/body/SKILL.md` | Repo copy has the older escalation rule; packaged distinguishes attended vs queue runs. Load-bearing — every Dream/REM period task runs under `direct/body`. | none |
+| C8 `resolve-conflicts-recurring-not-installed` | gap | `coga/recurring/` | Package ships a `resolve-conflicts` recurring template + CLI command; `coga init` never back-fills. Repo has a stale-branch backlog, so the omission is load-bearing. | none |
+| C9 `coga-gitignore-orphan-comment-block` | stale | `coga/.gitignore` | Same as K15. Delete the duplicated comment block after the end marker. | none |
+
+**Operator-side note (no PR can fix it):** `coga/.coga/.venv/` vendors a
+non-editable coga 0.3.0 whose CLI lacks `run`, `resolve-conflicts`, and
+`secret`, while on-PATH `coga` resolves to the editable checkout
+(`coga/.coga/COGA_PIN` → `/home/n/Code/claude/coga`). Both report `0.3.0`, so
+`--version` hides the skew. If anything resolves `coga` to the vendored binary,
+every `coga run <recipe>` in the resynced templates fails. Gitignored — remedy
+is an operator `coga init` re-vendor. Surfaced as `human-needed`.
+
+### Merged disposition plan (Phases 2 + 3 deduped)
+
+Proposal PRs (`pr-required`, never auto-merged):
+- **PR A** — recurring recipe surface: C1 + C3 + K2 + K11 + K12, and K3's
+  repo-side mitigation (move `last_serviced_period` above `### Digest State`).
+- **PR B** — Dream template Phases 1/5 (K1/C2) + delete vestigial
+  `coga/workflows/dream/` (C4). Based on PR #1's branch, not `main`.
+- **PR C** — packaged-copy resyncs: C6/K8 (both `CLAUDE.md` and `AGENTS.md`),
+  C7, C9/K15.
+
+Gap draft tickets (`code/with-review`): K3+K4 (upstream digest fixes),
+K6+K13 (surprise-lunch reset + worktree prune), K7 (ADK skill disposition),
+K10 (Slack enablement), C8 (install resolve-conflicts).
+**Do not re-create K9's two existing W30 drafts.**
+
+`human-needed`: K9 (W30 drafts idle a week), K14 (PR #1 unreviewed a full
+period), the vendored-venv skew above. K5/C5 is this run's own residue —
+resolved in-run rather than deferred.
