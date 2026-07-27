@@ -1,7 +1,7 @@
 ---
 slug: dream/validate-drift
 title: Validate drift
-status: draft
+status: active
 owner: nicktoper
 human: nicktoper
 agent: claude

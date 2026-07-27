@@ -186,3 +186,4 @@ error: cannot lock ref 'refs/remotes/origin/main': is at 0ecc238d085b8da0ac3e685
 2026-07-27 15:37 [recurring/dream] [human:nicktoper] started (active → in_progress) via coga launch
 2026-07-27 15:37 [recurring/dream] [human:nicktoper] launched (assignee=claude, agent=claude)
 2026-07-27 15:41 [dream/validate-drift] [human:nicktoper] created (status=draft)
+2026-07-27 15:41 [dream/validate-drift] [human:nicktoper] activated (draft → active)
