@@ -160,3 +160,4 @@ error: cannot lock ref 'refs/remotes/origin/main': is at 0ecc238d085b8da0ac3e685
 2026-07-27 15:28 [recurring/skill-update] [system] created (status=active)
 2026-07-27 15:28 [recurring/skill-update] [system] created recurring/skill-update for 2026-W31
 2026-07-27 15:28 [recurring/branch-sweep] [human:nicktoper] started (active → in_progress) via coga launch
+2026-07-27 15:28 [recurring/branch-sweep] [human:nicktoper] launched (assignee=claude, agent=claude)
