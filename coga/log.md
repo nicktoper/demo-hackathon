@@ -191,3 +191,4 @@ error: cannot lock ref 'refs/remotes/origin/main': is at 0ecc238d085b8da0ac3e685
 2026-07-27 15:58 [surprise-lunch/reset-the-cli-contract-ticket-to-implement-and-cle] [human:nicktoper] created (status=draft)
 2026-07-27 15:58 [decide-the-fate-of-the-seven-unreferenced-google-a] [human:nicktoper] created (status=draft)
 2026-07-27 15:58 [enable-a-notification-channel-or-park-the-slack-on] [human:nicktoper] created (status=draft)
+2026-07-27 15:58 [install-the-resolve-conflicts-recurring-task] [human:nicktoper] created (status=draft)
