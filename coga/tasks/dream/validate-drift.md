@@ -44,3 +44,16 @@ Result: 2 issue(s): 0 direct fix, 0 PR proposal, 2 human-needed.
   Remediation: Unknown validator issue kind. Ask a human before changing repo state.
 - `surprise-lunch/define-cli-and-configuration-contract`: `stuck-in-progress` (warn) - in_progress but idle for 232.6h
   Remediation: Ask the owner whether the task should be relaunched, blocked, paused, or bumped. The skill should not change lifecycle state silently.
+
+## Dream Skill: validate-drift
+
+Generated: 2026-07-27T22:43:03+00:00
+Command: `/home/n/.local/share/uv/tools/coga/bin/python -m coga.validate --json --fix`
+Task: `dream/validate-drift`
+
+Result: 1 issue(s): 0 direct fix, 0 PR proposal, 1 human-needed.
+
+### Human Needed
+
+- `surprise-lunch/define-cli-and-configuration-contract`: `stuck-in-progress` (warn) - in_progress but idle for 232.6h
+  Remediation: Ask the owner whether the task should be relaunched, blocked, paused, or bumped. The skill should not change lifecycle state silently.
