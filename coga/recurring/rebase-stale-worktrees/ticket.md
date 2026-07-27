@@ -76,7 +76,35 @@ last_serviced_period: 2026-W31
 
 ## Rebase Run Summary
 
-- `feat/surprise-lunch-cli`: rebased-local — clean rebase onto origin/main
-  (was 34 behind, 2 own commits), 98 tests pass under py3.12. Not pushed: no
-  feature-branch remote/PR exists (branch upstream is origin/main, which must
-  not be pushed). Unblocks: `coga launch surprise-lunch/define-cli-and-configuration-contract` (open-pr step).
+Run 2026-W31 (2026-07-27). Live set = 1 branch. Nothing rebased, nothing pushed.
+
+- `feat/surprise-lunch-cli`: **skipped-verify-failed — human needed.** 98 behind
+  `origin/main` and **0 commits of its own** (`git rev-list --left-right --count`
+  = `98 0`; tip `f1ab386` is an ancestor of `origin/main`; branch reflog holds
+  only `branch: Created from main`). Its registered worktree
+  `/tmp/demo-hackathon-surprise-lunch-cli` no longer exists (`prunable`), so git
+  refuses to check the branch out anywhere else — but rebasing is moot regardless:
+  there is no work on it to rebase. The ticket's `## Implemented` section claims an
+  installable `surprise-lunch` package; `src/` exists in neither `origin/main` nor
+  the branch, the deleted worktree's own reflog records no commits, and
+  `git fsck --dangling` turns up only `On main: autostash` blobs. The
+  implementation was made in an independent `/tmp` clone and is **not recoverable
+  from this repository.** Not fixable by this task — see Follow-ups.
+- `dream/resync-phase4-retro-isolation`: out of scope — 28 behind / 1 ahead, but
+  no worktree and no not-`done` ticket names it under `## Dev`. Same residue
+  branch-sweep also left alone; a human owns it.
+
+Corrects last run's entry, which reported `feat/surprise-lunch-cli` as
+`rebased-local` with "2 own commits, 98 tests pass". No such commits exist on the
+branch and none ever reached this repo's object store — that run was reporting on
+an independent clone's state, not the branch's.
+
+### Follow-ups (human)
+
+1. `surprise-lunch/define-cli-and-configuration-contract` is `in_progress` at
+   `open-pr` with nothing to open a PR from. It needs to go back to `implement`,
+   not forward — do **not** relaunch it expecting the staleness gate to be the
+   only problem.
+2. Its `## Dev` `worktree:` line points at a deleted path and the branch is still
+   registered to it, which is why the branch cannot be checked out. Clearing that
+   registration is branch-sweep's / a human's call, not this task's.
