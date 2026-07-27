@@ -1,7 +1,7 @@
 ---
 slug: recurring/digest
 title: Daily digest
-status: in_progress
+status: done
 owner: nick
 human: nick
 agent: claude
@@ -18,7 +18,6 @@ workflow:
     assignee: agent
 secrets: null
 script: null
-step: 1 (flush)
 ---
 
 ## Description
@@ -58,3 +57,29 @@ hidden state — so the queue and scan boundary are always legible.
 <!-- coga:blackboard -->
 
 The blackboard is a notepad to be written to often as the human and agent works through a task.
+
+## Run 2026-07-27 (flush)
+
+`coga digest` ran clean: 11 items rendered, spool drained to anchor
+`974b8ca7a0da`, `### Digest State` advanced `918b46d..1b3e423` (46 commits
+scanned, 4 reported).
+
+Two observations for the owner — neither blocked this run:
+
+1. **Nothing reached Slack.** `coga/coga.toml` has `[notification] channels = []`
+   (the fresh-repo default) and there is no local override, so the rendered
+   digest was suppressed to stderr. Expected behavior, not a failure — but the
+   daily digest is a no-op as a team signal until a channel is configured.
+2. **`coga digest` clobbered `last_serviced_period` in the parent blackboard.**
+   Before the run `coga/recurring/digest/ticket.md` ended with
+   `last_serviced_period: 2026-07-27`; the digest's `### Digest State` rewrite
+   dropped it. Every other recurring ticket still carries its own. Restored by
+   hand this run. Risk if unfixed: the next `coga recurring` scan sees no
+   serviced-period mark for digest and may refire the same period, posting a
+   duplicate digest. The state write should preserve keys outside its own
+   section.
+
+Also worth a look (not acted on): the "Also merged (no ticket)" section listed
+four `Log: recurring/...` commits. Those are Coga's own state-sync writes, which
+step 4 of the description says should be filtered out — the filter appears to
+match only `Sync coga state`, not `Log: ...`.
