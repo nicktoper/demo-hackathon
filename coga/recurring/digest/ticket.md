@@ -60,3 +60,5 @@ so it can grow unbounded).
 last_commit: 1b3e42359866e01f34ca99c616404d11e8501537
 range: 918b46d..1b3e423 (46 commit(s), 4 reported)
 posted: yes
+
+last_serviced_period: 2026-07-27

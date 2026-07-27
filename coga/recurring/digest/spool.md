@@ -18,3 +18,4 @@ context. The git high-water mark lives separately in the digest ticket's
 
 consumed_through: 974b8ca7a0da
 {"id":"974b8ca7a0da","ts":"2026-07-27T15:33","project":"demo-hackathon","kind":"done","detail":"claude finished: execute → done ✅ — Rebase sweep 2026-W31: nothing rebased. Only live branch feat/surprise-lunch-cli has 0 own commits — the surprise-lunch implementation is not in this repo (lost with a deleted /tmp clone). Ticket define-cli-and-configuration-contract needs to go back to implement, not open-pr.","ticket":"recurring/rebase-stale-worktrees","owner":"nicktoper"}
+{"id":"48182376364c","ts":"2026-07-27T15:35","project":"demo-hackathon","kind":"done","detail":"claude finished: flush → done ✅","ticket":"recurring/digest","owner":"nick"}
