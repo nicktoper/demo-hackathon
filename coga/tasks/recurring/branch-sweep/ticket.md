@@ -1,7 +1,7 @@
 ---
 slug: recurring/branch-sweep
 title: Branch sweep
-status: in_progress
+status: done
 owner: nicktoper
 human: nicktoper
 agent: claude
@@ -18,7 +18,6 @@ workflow:
     assignee: agent
 secrets: null
 script: null
-step: 1 (sweep)
 ---
 
 ## Description
@@ -61,4 +60,26 @@ a standalone one-off ticket that sets `workflow: branch-sweep/sweep`.
 
 <!-- coga:blackboard -->
 
-The blackboard is a notepad to be written to often as the human and agent works through a task.
+## Run — 2026-W31
+
+`coga run branch-sweep`, with `gh` authed as `nicktoper` (real merge checks,
+no skipped-for-missing-gh branches).
+
+Result:
+
+- **deleted local `coga/skill-update`** — merged, no remote ref.
+- **skipped `dream/resync-phase4-retro-isolation`** (local + `origin/`) — no
+  merged PR for the tip `bf4157e`, unmerged work. Left in place by design;
+  needs a manual decision (open a PR or abandon it).
+- **skipped `feat/surprise-lunch-cli`** — recorded on the live
+  `surprise-lunch/define-cli-and-configuration-contract` ticket (in_progress,
+  checked out in the `/tmp/demo-hackathon-surprise-lunch-cli` worktree).
+
+Post-sweep state: local = `main`, `dream/resync-phase4-retro-isolation`,
+`feat/surprise-lunch-cli`; remote = `main`,
+`dream/resync-phase4-retro-isolation`.
+
+Residual manual pass: only `dream/resync-phase4-retro-isolation`.
+
+No durable state to record — the parent blackboard holds
+`last_serviced_period` only, and `coga recurring` owns that key.
