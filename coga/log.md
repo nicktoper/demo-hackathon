@@ -188,3 +188,4 @@ error: cannot lock ref 'refs/remotes/origin/main': is at 0ecc238d085b8da0ac3e685
 2026-07-27 15:41 [dream/validate-drift] [human:nicktoper] created (status=draft)
 2026-07-27 15:41 [dream/validate-drift] [human:nicktoper] activated (draft → active)
 2026-07-27 15:58 [fix-coga-digest-state-write-clobbering-and-the-log] [human:nicktoper] created (status=draft)
+2026-07-27 15:58 [surprise-lunch/reset-the-cli-contract-ticket-to-implement-and-cle] [human:nicktoper] created (status=draft)
