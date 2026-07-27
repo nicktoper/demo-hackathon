@@ -193,3 +193,4 @@ error: cannot lock ref 'refs/remotes/origin/main': is at 0ecc238d085b8da0ac3e685
 2026-07-27 15:58 [enable-a-notification-channel-or-park-the-slack-on] [human:nicktoper] created (status=draft)
 2026-07-27 15:58 [install-the-resolve-conflicts-recurring-task] [human:nicktoper] created (status=draft)
 2026-07-27 16:00 [recurring/dream] [agent:claude] slack: Dream 2026-W31: validate-drift 1 human-needed, 24 findings → 3 proposal PRs (#3 recurring recipe surface — ~1M tokens/sweep, #4 Dream phases 1/5 stacked on #1, #5 repo doc corrections), 5 gap tickets, 6 done period tickets reaped. Review gates: #1 open a full period, 2 W30 drafts still undecided, vendored .coga/.venv lacks 'coga run'.
+2026-07-27 16:00 [recurring/dream] [human:nicktoper] task done — Dream 2026-W31 complete: 3 proposal PRs (#3, #4, #5), 5 gap tickets, 6 period tickets reaped, 5 human-needed gates.
