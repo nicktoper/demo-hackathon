@@ -1,7 +1,7 @@
 ---
 slug: recurring/skill-update
 title: Skill update
-status: in_progress
+status: done
 owner: nicktoper
 human: nicktoper
 agent: claude
@@ -18,7 +18,6 @@ workflow:
     assignee: agent
 secrets: null
 script: null
-step: 1 (update)
 ---
 
 ## Description
@@ -94,3 +93,13 @@ PR: https://github.com/nicktoper/demo-hackathon/pull/2
 - `coga/show`: `skipped-bundled` (bundled) - bundled skill updates come from the coga package; run `pip install --upgrade coga`
 - `coga/ticket/finalize`: `skipped-bundled` (bundled) - bundled skill updates come from the coga package; run `pip install --upgrade coga`
 - `retro/done-ticket`: `skipped-bundled` (bundled) - bundled skill updates come from the coga package; run `pip install --upgrade coga`
+
+### Run notes
+
+- Recipe exited 0: 1 updated, 0 follow-up, 26 skipped (all `skipped-bundled`,
+  package-backed — expected, they refresh via `pip install --upgrade coga`).
+- No conflicts, no local adaptations skipped, no fetch failures — nothing needs
+  human resolution beyond reviewing the PR.
+- Draft PR #2 on `coga/skill-update` carries 12 files across the 7
+  `google-agents-cli-*` skills, delegated through the `gh-managed` skill.
+  Not merged; human review + undraft is the follow-up.
