@@ -16,12 +16,3 @@ coga.local.toml
 **/_template/
 **/_template.md
 # <<< coga-managed <<<
-
-# Machine-local config — paths and secrets. Never commit.
-
-# Vendored CLI — written by `coga init` from upstream.
-
-# Generated merged skill view for agent CLIs. Rebuilt by `coga init`
-# and `coga launch`.
-
-# Per-domain scaffolding templates (bare `_template`, `_template.md`).
