@@ -15,12 +15,6 @@ context. The git high-water mark lives separately in the digest ticket's
 ## Spool (pending)
 
 
-consumed_through: 5f013a22077d
-{"id":"5f013a22077d","ts":"2026-07-20T16:45","project":"demo-hackathon","kind":"done","detail":"claude finished: execute → done ✅ — 1 live branch: feat/surprise-lunch-cli rebased-local (clean, 98 tests pass), not pushed (no PR remote). Unblocks surprise-lunch/define-cli-and-configuration-contract open-pr.","ticket":"recurring/rebase-stale-worktrees","owner":"nicktoper"}
-{"id":"501ef0ccdf99","ts":"2026-07-20T16:45","project":"demo-hackathon","kind":"done","detail":"→ done (script)","ticket":"recurring/digest","owner":"nick"}
-{"id":"7ca78ef90f03","ts":"2026-07-20T16:45","project":"demo-hackathon","kind":"done","detail":"→ done (script)","ticket":"recurring/skill-update","owner":"nicktoper"}
-{"id":"f14746303110","ts":"2026-07-20T16:45","project":"demo-hackathon","kind":"done","detail":"→ done (script)","ticket":"recurring/blocker-reminders","owner":"nicktoper"}
-{"id":"c089716062f3","ts":"2026-07-20T16:59","project":"demo-hackathon","kind":"done","detail":"claude finished: execute → done ✅ — Dream 2026-W30 complete: 6 period tickets retired, 1 drift PR (#1), 2 gap drafts, validate clean.","ticket":"recurring/dream","owner":"nicktoper"}
-{"id":"9536f2414056","ts":"2026-07-27T15:29","project":"demo-hackathon","kind":"done","detail":"claude finished: sweep → done ✅","ticket":"recurring/branch-sweep","owner":"nicktoper"}
-{"id":"f53c6f5a1a0e","ts":"2026-07-27T15:30","project":"demo-hackathon","kind":"done","detail":"claude finished: sweep → done ✅","ticket":"recurring/autoclose-merged","owner":"nicktoper"}
+
+consumed_through: 974b8ca7a0da
 {"id":"974b8ca7a0da","ts":"2026-07-27T15:33","project":"demo-hackathon","kind":"done","detail":"claude finished: execute → done ✅ — Rebase sweep 2026-W31: nothing rebased. Only live branch feat/surprise-lunch-cli has 0 own commits — the surprise-lunch implementation is not in this repo (lost with a deleted /tmp clone). Ticket define-cli-and-configuration-contract needs to go back to implement, not open-pr.","ticket":"recurring/rebase-stale-worktrees","owner":"nicktoper"}
