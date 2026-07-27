@@ -395,3 +395,74 @@ Generated: 2026-07-27T22:54:35+00:00
 Task: `recurring/dream`
 
 Result: no-op. No cleanup-eligible processed done tickets still have task directories.
+
+## Dream Run Summary
+
+Generated: 2026-07-27T22:58Z · period 2026-W31 · repo `/home/n/Code/demo-hackathon`
+
+| # | Phase | Result | Detail |
+|---|---|---|---|
+| 1 | validate-drift | `reported` | 1 issue (0 direct-fix, 0 pr-proposal, 1 human-needed). Dispatch drift hit first — see note below. |
+| 2 | knowledge scan | `reported` | 15 findings: 0 extract, 4 drift, 3 stale, 8 gap. |
+| 3 | contract audit | `reported` | 9 findings: 6 drift, 2 stale, 1 gap, + 1 operator-side note. |
+| 4 | retro/done-ticket | `direct-fixed` | 6 period tickets direct-deleted. 0 knowledge PRs, 0 `## Retro` markers — correct for period tickets. |
+| 5 | cleanup-orphan-markers | `no-op` | No cleanup-eligible processed done tickets remain. |
+| 6 | disposition | `pr-opened` / `proposed` | 3 proposal PRs, 5 gap draft tickets. |
+
+**Phase 1 dispatch deviation.** The live editable CLI (`/home/n/Code/claude/coga`)
+no longer ships `bootstrap/workflows/dream/*`, and both `bootstrap/dream/tasks/*`
+skills dropped `script: run.py`. Phases 1 and 5 are now registered recipes.
+I restored the workflow files to get Phase 1 running (`b19e5ba`), then reverted
+that once the contract audit confirmed the removal was deliberate (`2a47b94`),
+and ran both phases via `coga run`. Net repo change from the workaround: none.
+
+### Findings routed
+
+**24 findings across Phases 2–3, deduped to 8 durable artifacts.**
+
+`drift` / `stale` → 3 proposal PRs (all `pr-required`, none auto-merged):
+
+- **[#3](https://github.com/nicktoper/demo-hackathon/pull/3)** — recurring
+  recipe surface (C1, C3, K2, K11, K12, K3-mitigation). *Highest value:* the
+  five templates lack the `recipe:` key, so `recurring_runner.py:519` falls
+  through to `launch_cmd` and spawns a full agent per job — ~1M cache-read
+  tokens per sweep for deterministic no-agent work.
+- **[#4](https://github.com/nicktoper/demo-hackathon/pull/4)** — Dream Phases
+  1/5 recipe model (K1, C2). **Stacked on PR #1**, disjoint hunks of the same
+  file; merge #1 first or retarget to `main` if #1 is closed.
+- **[#5](https://github.com/nicktoper/demo-hackathon/pull/5)** — context
+  composition claim in `CLAUDE.md`/`AGENTS.md` (C6/K8), `direct/body` resync
+  (C7), `.gitignore` cleanup (C9/K15).
+
+`gap` → 5 draft tickets (`code/with-review`):
+
+- `fix-coga-digest-state-write-clobbering-and-the-log` (K3+K4)
+- `surprise-lunch/reset-the-cli-contract-ticket-to-implement-and-cle` (K6+K13,
+  and Phase 1's `stuck-in-progress`)
+- `decide-the-fate-of-the-seven-unreferenced-google-a` (K7)
+- `enable-a-notification-channel-or-park-the-slack-on` (K10)
+- `install-the-resolve-conflicts-recurring-task` (C8)
+
+`extract` → none. Both scans read all six done period tickets in full and found
+no durable knowledge; their observations were already captured as K3/K4/K6/K11/K13
+and routed above before deletion.
+
+### human-needed / review gates
+
+1. **PR #1 unreviewed for a full period** (K14). It now has PR #4 stacked on it.
+   Every weekly sweep re-reports the branch until it is merged or closed.
+2. **Two 2026-W30 gap drafts untouched for a week** (K9) —
+   `populate-the-base-repo-context-stub`,
+   `capture-control-checkout-git-limitation-and-worktr`. Deliberately **not**
+   duplicated this run. The week of no decision is itself the signal.
+3. **Vendored CLI skew** — `coga/.coga/.venv/` holds a non-editable coga 0.3.0
+   whose CLI lacks `run`, `resolve-conflicts`, and `secret`, while on-PATH
+   `coga` resolves to the editable checkout. Both report `0.3.0`, so
+   `--version` hides it. If anything resolves `coga` to the vendored binary,
+   every `coga run <recipe>` in PR #3's resynced templates fails. Gitignored —
+   needs an operator `coga init` re-vendor.
+4. **PR #2 blocks the ADK skill decision** — settle it before acting on that
+   gap ticket; do not open a competing PR.
+5. **`surprise-lunch/define-cli-and-configuration-contract` stays
+   `in_progress`** (Phase 1's only issue). Dream does not change lifecycle
+   state; the reset is tracked in its gap ticket.
