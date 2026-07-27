@@ -310,3 +310,38 @@ against `coga/recurring/dream/ticket.md` shows **two** divergences:
 
 Overlap handling: both live in the same file, but in disjoint hunks. Phase 6
 opens a complementary PR for (1) only, leaving PR #1 to carry (2).
+
+## Findings
+
+### Phase 2 — knowledge scan (`reported`, 15 findings)
+
+Classes: 0 `extract`, 4 `drift`, 3 `stale`, 8 `gap`.
+
+| id | class | target | one-line |
+|---|---|---|---|
+| K1 `dream-template-phase15-drift` | drift | `coga/recurring/dream/ticket.md` | Phases 1/5 still say "child script task"; live CLI uses registered recipes. Overlaps PR #1 (disjoint hunks). |
+| K2 `recurring-templates-workflow-vs-recipe` | drift | `coga/recurring/{autoclose-merged,blocker-reminders,branch-sweep,digest,skill-update}/ticket.md` | All five frozen at 0.3.0 `workflow:` shape; packaged now uses `recipe:`. Digest also drifted on scope (Done vs Done/Canceled). |
+| K3 `digest-clobbers-last-serviced-period` | drift | `coga/recurring/digest/ticket.md` | `_write_digest_state` regex swallows keys after `### Digest State`, dropping `last_serviced_period`. Hand-restored 2 runs running. |
+| K4 `digest-log-commits-unfiltered` | drift | `coga/recurring/digest/ticket.md` | "Also merged" filter matches `Sync coga state` / `Ticket:` but not `Log: <slug>`. |
+| K5 `dream-child-task-residue` | gap | `coga/tasks/dream/validate-drift.md` | This run's Phase 1 child task is `active`; no Dream phase reaps it. |
+| K6 `surprise-lunch-ticket-stranded-at-open-pr` | gap | `coga/tasks/surprise-lunch/define-cli-and-configuration-contract.md` | `in_progress` at step 3 `open-pr` with a 0-commit branch + dead worktree; needs to go back to `implement`. Matches Phase 1's `stuck-in-progress`. |
+| K7 `unreferenced-google-adk-skills` | gap | `coga/skills/google-agents-cli-*` | 7 skills, 22 files, zero refs anywhere; no `name:` frontmatter, no provenance. PR #2 overlap — do not open a competing PR. |
+| K8 `claude-md-canonical-context-claim-false` | stale | `CLAUDE.md` + `AGENTS.md` | Claims canonical contexts are "composed into every launched ticket"; `compose.py` does no such injection — they're only on `bootstrap/orient`. Also says 3, package ships 7. |
+| K9 `w30-gap-tickets-still-draft` | gap | `populate-the-base-repo-context-stub`, `capture-control-checkout-git-limitation-and-worktr` | W30 gap drafts untouched a week. **Do not re-create duplicates.** |
+| K10 `notifications-disabled-recurring-jobs-are-noops` | stale | `coga/coga.toml` vs digest/blocker-reminders templates | `channels = []`, no local override — two Slack-only recurring jobs are silent no-ops. |
+| K11 `skill-update-provenance-description-stale` | stale | `coga/recurring/skill-update/ticket.md` | Describes `.coga-source.json` provenance walk; no such file exists, real run used a `gh-managed` delegation path. |
+| K12 `digest-owner-nick-mismatch` | stale | `coga/recurring/digest/ticket.md` | `owner: nick` vs `nicktoper` everywhere else; will mis-@ once Slack is on. |
+| K13 `prunable-worktree-unowned` | gap | `/tmp/demo-hackathon-surprise-lunch-cli` | Prunable worktree registration blocks `git worktree add`; three jobs each deferred to another. Merge into K6. |
+| K14 `stale-dream-resync-branch` | gap | PR #1 | Open + unreviewed a full period; every sweep re-reports it. |
+| K15 `gitignore-orphan-comments` | stale | `coga/.gitignore` | Comments duplicated below the coga-managed end marker with no patterns. Cosmetic. |
+
+**Phase 4 input:** no `extract` findings. All six done period tickets were read
+in full and carry no durable knowledge — their content is either run transcript
+or observations already captured above as K3/K4/K6/K11/K13. Direct-delete all
+six, no PR, no marker.
+
+**Phase 6 routing guidance from the scan:** three proposal PRs — (a) K1;
+(b) K2+K11+K12 (+K3 repo-side mitigation); (c) K8 (+K15). Four draft tickets,
+not eight — K3+K4 (upstream digest fixes), K6+K13 (surprise-lunch reset),
+K7 (ADK disposition), K10 (Slack enablement). K5, K9, K14 are `human-needed`
+summary gates, not new tickets.
