@@ -244,3 +244,69 @@ Git history preserves the completed run.
 <!-- coga:blackboard -->
 
 The blackboard is a notepad to be written to often as the human and agent works through a task.
+
+## Run notes
+
+- Repo: `/home/n/Code/demo-hackathon`. Period `2026-W31`.
+- Live CLI is an **editable install** at `/home/n/Code/claude/coga` (shadows the
+  uv site-packages 0.3.0 copy). Packaged template resolution reads
+  `/home/n/Code/claude/coga/src/coga/resources/templates/coga/bootstrap/`.
+- Open PRs at run start: #1 (`dream/resync-phase4-retro-isolation`, edits
+  `coga/recurring/dream/ticket.md`), #2 (`coga/skill-update`, edits 12 files
+  under `coga/skills/google-agents-cli-*`). Both must be treated as overlap
+  gates for Phase 6 proposal PRs.
+
+### Phase 1 — validate-drift (`reported`)
+
+Dispatch deviation, recorded as a drift finding: the live CLI no longer ships
+`bootstrap/workflows/dream/*`, so a child script task could not be created from
+a packaged workflow ref. The workers moved to registered recipes
+(`coga run validate-drift` / `coga run cleanup-orphan-markers`) and the two
+`bootstrap/dream/tasks/*` SKILL.md files dropped their `script: run.py`
+frontmatter. Restored `coga/workflows/dream/{validate-drift,cleanup-orphan-markers}.md`
+as repo-local overrides (commit `b19e5ba`) so the child tasks' frozen workflow
+refs load, then executed via the recipe.
+
+Child task: `dream/validate-drift`. Result: 1 issue — 0 direct-fix,
+0 pr-proposal, 1 human-needed.
+
+- `surprise-lunch/define-cli-and-configuration-contract`: `stuck-in-progress`
+  (warn) — `in_progress`, idle 232.6h. Lifecycle decision belongs to the owner;
+  the skill must not change it silently.
+
+### Phase 4 eligibility (established while Phases 2–3 ran)
+
+Six done tickets on disk, all `recurring/<name>` period tickets:
+`autoclose-merged`, `blocker-reminders`, `branch-sweep`, `digest`,
+`rebase-stale-worktrees`, `skill-update`. None carries a `## Retro` marker
+(0 in every file). No open PR edits anything under `coga/tasks/` — PR #1 edits
+`coga/recurring/dream/ticket.md`, PR #2 edits `coga/skills/google-agents-cli-*`.
+So all six are eligible.
+
+Caveat on the template's premise: the body asserts period tickets "carry
+nothing durable". False for `recurring/digest` this sweep — its blackboard
+records two concrete coga defects (digest state-write clobbers
+`last_serviced_period`; the "Also merged (no ticket)" filter matches only
+`Sync coga state`, not `Log: ...`). `recurring/branch-sweep` also records a
+residual manual decision on branch `dream/resync-phase4-retro-isolation`.
+Those must land in durable artifacts before the tickets are deleted.
+
+### Dream template drift — full picture
+
+`diff` of the live packaged template
+(`/home/n/Code/claude/coga/src/coga/resources/templates/coga/recurring/dream/ticket.md`)
+against `coga/recurring/dream/ticket.md` shows **two** divergences:
+
+1. **Phases 1 & 5 dispatch** (run-order lines, the worker paragraph, Phase 1
+   body, Phase 5 body): packaged says *registered recipe*, run
+   `coga run validate-drift` / `coga run cleanup-orphan-markers` directly from
+   the Dream task, inheriting `COGA_TASK_*`, and explicitly **"Do not create
+   child script tasks."** Repo still says *script worker* + child script task.
+   This is the drift that blocked Phase 1 of this run.
+2. **Phase 4 isolation** (evidence snapshot, isolated checkout,
+   `--keep-control-checkout`, cleanup/verification): packaged has it, repo
+   does not. **Already covered by open PR #1**, whose premise I re-verified
+   against the live package — still valid and current.
+
+Overlap handling: both live in the same file, but in disjoint hunks. Phase 6
+opens a complementary PR for (1) only, leaving PR #1 to carry (2).
