@@ -1,7 +1,7 @@
 ---
 slug: recurring/blocker-reminders
 title: Blocker reminders
-status: in_progress
+status: done
 owner: nicktoper
 human: nicktoper
 agent: claude
@@ -18,7 +18,6 @@ workflow:
     assignee: agent
 secrets: null
 script: null
-step: 1 (remind)
 ---
 
 ## Description
@@ -50,3 +49,13 @@ selection; it only makes unresolved asks visible again.
 <!-- coga:blackboard -->
 
 The blackboard is a notepad to be written to often as the human and agent works through a task.
+
+## Run 2026-07-27
+
+- Ran `coga run blocker-reminders`.
+- Result: `[blockers] no unresolved blockers to remind.` — no task in
+  `coga/tasks/` currently has `status: blocked`, so no reminders posted and no
+  watermarks written.
+- No persistent state to advance: the parent blackboard already records
+  `last_serviced_period: 2026-07-27`, and reminder dedup lives on blocked tasks
+  by design.
