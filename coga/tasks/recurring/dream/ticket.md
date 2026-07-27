@@ -388,3 +388,10 @@ K10 (Slack enablement), C8 (install resolve-conflicts).
 `human-needed`: K9 (W30 drafts idle a week), K14 (PR #1 unreviewed a full
 period), the vendored-venv skew above. K5/C5 is this run's own residue —
 resolved in-run rather than deferred.
+
+## Dream Skill: cleanup-orphan-markers
+
+Generated: 2026-07-27T22:54:35+00:00
+Task: `recurring/dream`
+
+Result: no-op. No cleanup-eligible processed done tickets still have task directories.
