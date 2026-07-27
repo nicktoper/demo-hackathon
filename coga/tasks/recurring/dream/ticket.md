@@ -1,7 +1,7 @@
 ---
 slug: recurring/dream
 title: Dream
-status: done
+status: active
 owner: nicktoper
 human: nicktoper
 agent: claude
@@ -18,6 +18,7 @@ workflow:
     assignee: agent
 secrets: null
 script: null
+step: 1 (execute)
 ---
 
 ## Description
@@ -242,91 +243,4 @@ Git history preserves the completed run.
 
 <!-- coga:blackboard -->
 
-Dream run for period 2026-W30. Started 2026-07-20.
-
-## Progress
-
-- **Phase 1 — validate-drift: DONE (no-op).** `coga validate --json` → 14 ok,
-  0 issues, 0 fixes. Ran the deterministic validator surface directly; nothing
-  to repair, so no child repair branch needed.
-- Phase 2 — knowledge scan: in progress (subagent).
-- Phase 3 — contract audit: in progress (subagent).
-- **Phase 4 — retro/done-ticket: DONE.** Knowledge scan found extract=none
-  across all 6 done tickets (all recurring period tickets), so Retro reduced to
-  direct-delete of all 6: branch-sweep, blocker-reminders, digest,
-  rebase-stale-worktrees, skill-update, autoclose-merged. No knowledge PR, no
-  `## Retro` markers. Each a `coga delete` (git rm + `Ticket: <slug> — deleted`
-  commit); recovery via `git restore`.
-- **Phase 5 — cleanup-orphan-markers: DONE (no-op).** Zero candidates — no
-  `## Retro` marker exists on any task directory (Phase 4 knowledge PRs would
-  create them, and there were none). Nothing to clean up.
-- **Phase 6 — disposition + summary: DONE.** D1 drift → proposal PR #1; G1 & G2
-  gaps → draft tickets; extract/stale → none. Summary below.
-
-## Findings
-
-### Phase 2 — knowledge scan (done)
-
-- **extract: none.** All 6 done tickets are recurring period tickets; their
-  blackboards carry only operational output (digest post, skill-update status,
-  rebase summary), nothing durable to lift into a context/skill.
-- **stale: none.** No context/skill contradicts repo reality.
-- **gap G1 (low confidence):** Repeated open-PR / control-checkout blockage has
-  no durable carrier. `surprise-lunch/define-cli-and-configuration-contract`
-  records read-only git metadata in the registered worktree, a broken `codex`
-  sandbox launcher, and GitHub DNS failures + an ad-hoc human-approved recovery
-  (replace read-only worktree metadata with a writable `/tmp` clone).
-  `recurring/rebase-stale-worktrees` independently reports `feat/surprise-lunch-cli`
-  stuck local-only. Candidate carrier: a `coga/contexts/dev/control-checkout`
-  note. Root causes read as environmental → borderline.
-- **gap G2 (minor):** `coga/context.md` is still the stock template stub yet is
-  composed into every prompt. Could be populated with the repo's real identity
-  (coga demo; surprise-lunch DoorDash CLI; agent codex; owner nicktoper).
-
-### Phase 3 — contract audit (done)
-
-- **drift D1:** Dream template Phase 4 body (`coga/recurring/dream/ticket.md`
-  ~lines 121–132) has diverged from the packaged canonical template
-  (`…/uv/tools/coga/lib/python3.12/…/resources/templates/coga/recurring/dream/ticket.md`).
-  Packaged version mandates an **isolated git worktree** for the whole Retro
-  pass, `coga delete <slug> --keep-control-checkout`, copying gitignored
-  `coga.local.toml` into the isolated checkout, and warns "Do not run Retro in
-  Dream's checkout." Repo body uses plain `coga delete <slug>` in one subagent.
-  Both `coga delete` forms + `--keep-control-checkout` exist in CLI 0.3.0, so no
-  unbacked claim — but the dispatch contract is materially behind the packaged
-  isolation/safety guidance and the simplification is undocumented. Possibly an
-  intentional demo simplification → **proposal PR, human confirms.**
-- Everything else on the living contract surface checks out (CLAUDE.md/AGENTS.md
-  commands verified against `coga --help`; all recurring workflow/skill refs
-  resolve; contexts clean; CLI 0.3.0, no version skew; validate 14/14).
-
-## Dream Run Summary
-
-Generated: 2026-07-20T23:58Z · period 2026-W30
-
-| Phase | Result | Detail |
-|-------|--------|--------|
-| 1 · validate-drift | no-op | `coga validate --json` → 14 ok, 0 issues, 0 fixes |
-| 2 · knowledge scan | reported | extract 0, stale 0, gap 2 (both low-confidence) |
-| 3 · contract audit | reported | drift 1 (Dream template Phase 4 vs packaged) |
-| 4 · retro/done-ticket | direct-fixed | 6 period tickets direct-deleted, 0 knowledge PRs |
-| 5 · cleanup-orphan-markers | no-op | 0 candidates (no `## Retro` markers on disk) |
-| 6 · disposition | proposed | 1 proposal PR + 2 gap draft tickets |
-
-**Findings routed (all findings have a durable home):**
-
-- drift D1 → **PR #1** https://github.com/nicktoper/demo-hackathon/pull/1 —
-  resync Dream template Phase 4 to packaged isolated-checkout Retro guidance.
-  `pr-required`; human confirms whether the simplification was intentional.
-- gap G1 → draft ticket `capture-control-checkout-git-limitation-and-worktr`
-  (low confidence; may be environmental noise).
-- gap G2 → draft ticket `populate-the-base-repo-context-stub` (minor).
-- extract: none · stale: none.
-
-**Phase 4 direct-deletes** (recurring period tickets, nothing durable; recovery
-via `git restore`): branch-sweep, blocker-reminders, digest,
-rebase-stale-worktrees, skill-update, autoclose-merged. Deletions committed and
-pushed to `origin/main` (tip `6687b25`).
-
-**Human review gates:** PR #1 (do not auto-merge); 2 gap drafts await
-owner accept/dismiss. No blockers.
+The blackboard is a notepad to be written to often as the human and agent works through a task.
