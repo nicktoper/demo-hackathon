@@ -1,7 +1,7 @@
 ---
 slug: recurring/rebase-stale-worktrees
 title: Rebase stale worktrees
-status: in_progress
+status: done
 owner: nicktoper
 human: nicktoper
 agent: claude
@@ -18,7 +18,6 @@ workflow:
     assignee: agent
 secrets: null
 script: null
-step: 1 (execute)
 ---
 
 ## Description
@@ -82,4 +81,22 @@ abandoned or already-merged residue — branch-sweep's problem, not this task's.
 
 <!-- coga:blackboard -->
 
-The blackboard is a notepad to be written to often as the human and agent works through a task.
+Run for 2026-W31. Durable results live in the parent blackboard
+(`coga/recurring/rebase-stale-worktrees/ticket.md`, `## Rebase Run Summary`);
+these are this run's working notes only.
+
+- Enumerated: worktrees = `main` + `feat/surprise-lunch-cli` (registered to
+  `/tmp/demo-hackathon-surprise-lunch-cli`, `prunable` — directory gone).
+  Ticket `## Dev` branches = `feat/surprise-lunch-cli` only
+  (`surprise-lunch/define-cli-and-configuration-contract`, `in_progress`).
+  Live set = 1. `dream/resync-phase4-retro-isolation` is stale but not live.
+- `feat/surprise-lunch-cli` is 98 behind / **0 ahead** of `origin/main`. No work
+  to rebase. `git worktree add` refuses it (still registered to the dead path);
+  did not prune — deletion is branch-sweep's, per the safety rules.
+- Searched for the missing implementation: not in `origin/main`, not in the
+  branch tree, not in the dead worktree's reflog (creation + one `reset: moving
+  to HEAD`), and every `git fsck --dangling` commit is an `On main: autostash`
+  snapshot with no `src/`. Concluded it lived in an independent `/tmp` clone
+  and is gone.
+- Nothing rebased, nothing pushed, no ticket unblocked. Left `main` and every
+  ref untouched.
