@@ -24,19 +24,29 @@ workflow step are loaded too.
 - `coga mark done <slug>` — finish active or in-progress work
 - `coga block --task <slug> --reason "..."` — stop for a concrete answer
 - `coga unblock <slug> --answer "..."` — record the answer and resume
+- `coga run <recipe>` — run a registered deterministic recipe with no agent
+  (`autoclose`, `digest`, `blocker-reminders`, `branch-sweep`,
+  `validate-drift`, `cleanup-orphan-markers`, `recurring-scan`,
+  `skill-update`)
 - `coga --help` — full CLI surface
 
 ## Mental model
 
-The canonical contexts are package-backed and composed automatically; a repo can
-override them with local files under `coga/contexts/coga/`. Read in order:
+The canonical contexts are package-backed; a repo can override them with local
+files under `coga/contexts/coga/`. Read in order:
 
 - `principles/SKILL.md` — non-negotiables (markdown-first, fail-loud, classical mode)
 - `architecture/SKILL.md` — primitives, planes, prompt composition, locking
 - `cli/SKILL.md` — full command reference
 
-These are the exact context refs composed into every launched ticket; if they
-disagree with anything else in the repo, they win.
+`coga launch bootstrap/orient` composes exactly these three, because they are
+named in that ticket's own `contexts:`. Any other ticket gets whatever its own
+`contexts:` list names — nothing is injected automatically, except
+`coga/period-task`, which the recurring creator attaches to every period task.
+Where these contexts disagree with anything else in the repo, they win.
+
+The package ships seven: `architecture`, `cli`, `important`, `patterns`,
+`period-task`, `principles`, `sync`.
 
 ## Don't
 
