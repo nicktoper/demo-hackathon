@@ -1,29 +1,30 @@
 ---
 schedule: "0 9 * * *"
-schedule_comment: "Every day at 9am — post one Slack digest of Done tickets and merged commits"
+schedule_comment: "Every day at 9am — post one Slack digest of Done/Canceled tickets and merged commits"
 title: "Daily digest"
-# A script step runs the flush directly with no agent: the workflow's one
-# step references the `coga/digest/flush` skill, whose `script:` runs
-# `coga digest`. It runs directly with no agent buffering, so it is safe for
-# unattended recurring runs.
+recipe: digest
+# The recurring runner executes this registered recipe directly with no agent.
+# The one-step workflow keeps the period task's lifecycle and skill contract
+# legible.
 workflow: digest/post
-owner: nick
+owner: nicktoper
 assignee: claude
 ---
 
 ## Description
 
-Post a single Slack digest focused on outcomes: Done tickets from the spool
-plus other commits merged to `origin/main` since the last digest run.
+Post a single Slack digest focused on outcomes: Done/Canceled tickets from the
+spool plus other commits merged to `origin/main` since the last digest run.
 
 Routine lifecycle chatter (`coga create`, message-less `bump`, `mark
 active/paused`, `retire`, successful recurring creates) does not enter Slack.
-Done tickets and recurring scan errors append one JSONL record to the dedicated
-`spool.md` file (its `## Spool (pending)` section) — see
+Done/Canceled tickets and recurring scan errors append one JSONL record to the
+dedicated `spool.md` file (its `## Spool (pending)` section) — see
 `coga.notification.notify`. Once a day this ticket fires on its schedule and
-its script step runs `coga digest`, which:
+its recipe runs the digest implementation, which:
 
-1. reads the unconsumed Done/error records (a merge-by-construction spool, not a lock),
+1. reads the unconsumed Done/Canceled/error records (a merge-by-construction
+   spool, not a lock),
 2. fetches `origin/main` and scans commits since `### Digest State` `last_commit`
    (first run falls back to the last 24 hours),
 3. attributes merge commits to Done tickets by matching PR numbers,
@@ -39,7 +40,8 @@ agent or a failure never waits a day to be seen.
 
 An empty spool is not automatically a no-op: merged commits can still produce
 the "Also merged (no ticket)" section. The run posts nothing only when there
-are no Done records, no recurring errors, and no post-filter new commits. The
+are no Done records, no Canceled records, no recurring errors, and no
+post-filter new commits. The
 spool and high-water mark are real, git-tracked, human-readable state — never
 hidden state — so the queue and scan boundary are always legible.
 
@@ -55,10 +57,10 @@ single `coga digest` consumer.
 human history in the repo-global `coga/log.md` (never composed into a run,
 so it can grow unbounded).
 
+last_serviced_period: 2026-07-27
+
 ### Digest State
 
 last_commit: 1b3e42359866e01f34ca99c616404d11e8501537
 range: 918b46d..1b3e423 (46 commit(s), 4 reported)
 posted: yes
-
-last_serviced_period: 2026-07-27

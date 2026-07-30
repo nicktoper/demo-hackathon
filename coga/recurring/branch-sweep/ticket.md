@@ -2,10 +2,10 @@
 schedule: "0 7 * * 1"
 schedule_comment: "Every Monday at 7am - prune stale git branches before the day's other automation starts"
 title: "Branch sweep"
-# A script step runs the sweep directly with no agent: the workflow's one
-# step references the `coga/branch-sweep/sweep` skill, whose `script:` calls
-# `coga.branchsweep.sweep_branches`. It runs directly with no agent buffering,
-# so it is safe for unattended recurring runs.
+recipe: branch-sweep
+# The recurring runner executes this registered recipe directly with no agent.
+# The one-step workflow keeps the period task's lifecycle and skill contract
+# legible.
 workflow: branch-sweep/sweep
 ---
 
@@ -21,11 +21,11 @@ a session dies mid-flight. Retire covers the common path daily (in effect,
 every time a ticket finishes); this sweep runs weekly to catch what leaks
 past it.
 
-Once a week this recurring task's script step runs the branch sweep, which:
+Once a week this recurring task's recipe runs the branch sweep, which:
 
 1. enumerates every local branch and every branch on the configured git remote,
 2. skips the configured control branch, the checked-out branch, and any branch recorded under a
-   not-`done` ticket's `## Dev` `branch:` line,
+   non-terminal ticket's `## Dev` `branch:` line,
 3. for the rest, checks GitHub by head branch name and current tip SHA —
    deletes only when a merged PR exists for that exact tip and no PR is
    currently open for the head branch, and
@@ -40,15 +40,14 @@ retire-time deletion shipped — abandoned no-PR branches are skipped and
 reported by design, so expect a residual manual pass rather than a fully
 clean slate.
 
-Because the runnable unit is the workflow + script skill
-(`branch-sweep/sweep`), this sweep runs three ways: on this schedule via
-`coga recurring`, on demand via `coga recurring launch branch-sweep`, or as
-a standalone one-off ticket that sets `workflow: branch-sweep/sweep`.
+The sweep runs on this schedule via `coga recurring`, on demand via
+`coga recurring launch branch-sweep`, or directly with
+`coga run branch-sweep`.
 
 <!-- coga:blackboard -->
 
 This blackboard persists across every run of this recurring task. The
-`coga/branch-sweep/sweep` script keeps no durable state here — every run's
+`branch-sweep` recipe keeps no durable state here — every run's
 output is the branches it deletes or reports as skipped. `coga recurring`
 keeps the serviced-period high-water mark here as `last_serviced_period`
 (weekly period key `YYYY-Www`) once the first run has fired.
