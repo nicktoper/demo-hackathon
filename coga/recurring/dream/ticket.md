@@ -268,4 +268,12 @@ ends in a PR, a draft ticket, or a recorded marker instead. `coga recurring`
 keeps Dream's serviced-period high-water mark here as `last_serviced_period`;
 `log.md` keeps append-only human history.
 
+**`last_serviced_period` is command-owned — never hand-edit it, and never carry
+it in a docs PR.** `coga recurring` writes it at the moment it actually creates
+the period task, and that coupling is the whole guarantee. Setting it ahead by
+hand claims a period was serviced when no task exists, and a period at or below
+the recorded value does not fire again — so a one-line edit in an unrelated
+resync can silently cost a full weekly cleanup run. If a resync branch touches
+this file, drop that line from the diff and let the create command move it.
+
 last_serviced_period: 2026-W31
