@@ -41,9 +41,17 @@ files under `coga/contexts/coga/`. Read in order:
 
 `coga launch bootstrap/orient` composes exactly these three, because they are
 named in that ticket's own `contexts:`. Any other ticket gets whatever its own
-`contexts:` list names — nothing is injected automatically, except
-`coga/period-task`, which the recurring creator attaches to every period task.
-Where these contexts disagree with anything else in the repo, they win.
+`contexts:` list names — **no package-backed context *reference* is attached
+automatically**, the one exception being `coga/period-task`, which the recurring
+creator attaches to every period task.
+
+That is a statement about context *refs*, not about the prompt. A launched
+ticket always receives several layers it never names: the base prompt and
+agent-mode block, this repo's `coga/context.md` (composed into every task
+prompt, including a ticket with `contexts: []`), the ticket's own inline
+`## Context`, the current workflow step's skill, and the blackboard. So a
+ticket is never context-free — it is only free of package contexts it did not
+ask for. Where these contexts disagree with anything else in the repo, they win.
 
 The package ships seven: `architecture`, `cli`, `important`, `patterns`,
 `period-task`, `principles`, `sync`.
