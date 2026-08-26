@@ -163,12 +163,19 @@ preserve the paths and surface a blocker.
 
 A done `recurring/<name>` ticket from this sweep is eligible like any other.
 Period tickets carry nothing durable (their output is the notification post or
-PR they already produced), so Retro direct-deletes them via `coga delete
-recurring/<name>` — no PR or marker — while leaving the recurring template's
-`last_serviced_period` untouched. If a completed period ticket survives into a
-later firing, the recurring scanner deletes it before creating that period's
-fresh task. The previous Dream run is removed by that scanner fallback before
-this Dream task is created, so Dream never sees or deletes its own predecessor.
+PR they already produced), so they are exactly the no-knowledge case above and
+take the **same** isolation split: `coga delete recurring/<name>
+--keep-control-checkout` from a linked worktree, or ordinary `coga delete
+recurring/<name>` from an independent clone — no PR or marker, and the
+recurring template's `last_serviced_period` left untouched. Do not read this
+paragraph's more specific slug as licence to drop the flag: a plain delete from
+a linked worktree fast-forwards the operator's control checkout, which is the
+mutation `--keep-control-checkout` exists to prevent.
+
+If a completed period ticket survives into a later firing, the recurring
+scanner deletes it before creating that period's fresh task. The previous Dream
+run is removed by that scanner fallback before this Dream task is created, so
+Dream never sees or deletes its own predecessor.
 
 Summarize each knowledge PR — and the directly-deleted no-knowledge tickets —
 in this run's blackboard.
